@@ -1,0 +1,123 @@
+﻿@model ShivGardenHouse.Models.SMS
+
+@{
+    ViewBag.Title = "SMSTemplate";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../../images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+@using (Html.BeginForm("SMSTemplate", "SMS", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">SMS Template</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Add New SMS Template</h5>
+                                    <p style="color: red">
+                                        @TempData["SMSTemplate"]
+                                    </p>
+                                    <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+                                </div>
+                                <div class="card-block">
+
+
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                Template Name<span style="color: red">*</span><span id="memberName" style="color: blue; float: right"></span>
+                                                @Html.TextBoxFor(m => m.TemplateName, new { @class = "form-control", @Placeholder = "Template Name" })
+                                                @Html.HiddenFor(m => m.PK_TemplateId)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label> Message </label>
+                                                @Html.TextAreaFor(m => m.Msg, new { @class = "form-control", @placeholder = "Message" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            @if (Model.PK_TemplateId == null)
+                                            {<input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                            }
+                                            else
+                                            {
+                                                @Html.HiddenFor(m => m.PK_TemplateId, new { @Value = @Model.PK_TemplateId })
+                                                <input class="btn btn-success pull-left" type="submit" onclick="return validateform();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                            }
+                                            <a class="btn btn-info" href="/SMS/SMSTemplateList">Back To List</a>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    function validateform() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#TemplateName').val() == '') {
+            $("#TemplateName").addClass('errortext');
+            $('#TemplateName').focus();
+            return false;
+        }
+        if ($('#Msg').val() == '') {
+            $("#Msg").addClass('errortext');
+            $('#Msg').focus();
+            return false;
+        }
+
+        return true;
+    }
+
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
+

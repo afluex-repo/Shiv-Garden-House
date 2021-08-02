@@ -1,0 +1,285 @@
+﻿@model ShivGardenHouse.Models.Plot
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>PrintAllotment</title>
+    <style>
+        table, th, td {
+            font-size: medium;
+            /*border: 1px solid black;*/
+            border-collapse: collapse;
+        }
+
+        th, td {
+            font-size: medium;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    @*<div style="height:80px;">
+
+
+        </div>
+
+        <table style="width: 100%;" border="0">
+            <tr>
+                <td colspan="2"><p style="margin-left:7%">@ViewBag.ReceiptNo </p></td>
+                <td colspan="2" style="text-align:right;"><p style="margin-right:1%;">@DateTime.Now.ToString("dd/MM/yyyy")</p></td>
+            </tr>
+        </table>*@
+
+    @*<table style="border: 0px none black;text-align:center;width:100%;" border="0">
+        <tbody>
+            <tr>
+                <td>
+                    <img src="../../Website/images/Logo.png" style="width: 141px;height: 92px;">
+                </td>
+            </tr>
+            <tr>
+                <td><h1>Shiv Garden House Projects </h1></td>
+            </tr>
+        </tbody>
+    </table>*@
+    <table style="border: 0px none black;">
+        <tbody>
+            <tr style="border: 0px none black;">
+                <td style="border: 0px none black;">
+                    <img src="../../Website/images/Logo.png" style="width: 253px;height:37px;">
+                </td>
+                <td style="border: 0px none black;"></td>
+                <td style="border: 0px none black;"><h1>Manglam Infra Farm</h1></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table style="width: 100%;" border="0">
+        <tr>
+            <td colspan="2">To, </td>
+        </tr>
+        <tr>
+            <td><b>Mr./Mrs. :    </b>@ViewBag.CustomerName</td>
+            <td><b>Mobile: </b> @ViewBag.CustomerContact  </td>
+        </tr>     
+        <tr>
+            <td><b>Reference Id:</b>@ViewBag.RefrenceId</td>
+            <td><b>Update by Id:</b>@ViewBag.UpadtedById</td>
+        </tr>    
+        <tr>
+            <td colspan="2"><b>Address:</b>@ViewBag.Address</td>
+        </tr>
+    </table>
+    <br />
+    <table style="width: 100%;">
+        <tr>
+            <td>Dear Sir/Madam , </td>
+        </tr>
+        
+        <tr>
+            <td>We congratulate you on being the proud owner of a Plot in our project "@ViewBag.ProjectName" .Received with thanks  for payment deposit given herein under.</td>
+        </tr>
+
+    </table>
+    <br />
+    <table style="width: 100%;">
+        <tr>
+            <td><b>Project Name :</b> @ViewBag.ProjectName</td>
+            <td><b>Plot Number  :</b>@ViewBag.PlotNumber</td>
+
+        </tr>
+        <tr>
+          
+            <td><b>Deposit Date :    </b>@ViewBag.DepositeDate</td>
+            <td><b>Mode Of Payment:  </b>@ViewBag.PaymentMode</td>
+        </tr>
+        <tr>
+          
+            <td><b>Booking Area :</b> @ViewBag.PlotArea</td>
+            <td><b>Cheque/RTGS/NEFT No.:</b>@ViewBag.TransactionNo</td>
+        </tr>
+        <tr>
+           
+            <td><b>Cheque/RTGS/NEFT Date .:</b>@ViewBag.TransactionDate</td>
+            <td><b>Bank:</b>@ViewBag.BankName</td>
+        </tr>
+        <tr>
+          
+            <td><b>Rate:</b>@ViewBag.Rate</td>
+            <td><b>Plot PLC:</b>@ViewBag.PLC</td>
+
+        </tr>
+        <tr>
+
+            <td><b>Net Plot Amount:</b>@ViewBag.NetAMount</td>
+            <td><b>Discount :</b>@ViewBag.Discount</td>
+
+
+        </tr>
+        <tr>
+         
+            <td><b>Total Plot Amount:</b>@ViewBag.TotalAMount</td>
+            <td><b>Paid Amount :</b>@ViewBag.PaidAmount</td>
+         
+
+        </tr>
+        <tr>
+            <td><b>Total Paid Amount:</b>@ViewBag.TotalPaidAmount</td>
+            <td><b>Remaining Amount:  </b>@ViewBag.BalanceAmt</td>
+          
+        </tr>
+        <tr>
+            <td colspan="2"> <b>Current Status :</b>@ViewBag.CurrentStatus </td>
+        </tr>
+    </table>
+     
+    <br />
+    <br />
+    <br />
+    <div class="row">
+
+        <div class="col-md-6 " style="text-align: left; width: 100%;">
+            <div class="form-group">
+                <label class="text-right float-right">(Authorised Signatory) </label>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Note-</h3>
+        1-The receipt is subject to realization of cash,cheque and DD.<br />
+        2-This is merely a receipt against the cheque/draft/pay order received by the company based on information furnished by the applicant in the application and the allotment persuant thereto is purely provisional and does not entitle the applicant to claim any right ,title or interest of any nature whose over the Land/Property.<br/>
+        3-In case the cheque comprising booking amount is dishonoured due to any reason whatsoever the applicant shall be deemed to be null and void and the allotment ,if any,shall be automatically cancelled/revoked/withdrawn without any notice to the applicant.<br/>
+        4-This is computer generated receipt .No stamp required.
+    </div>
+    <br />
+    <table style="width: 100%;text-align:center">
+        <tr>
+            <td>
+                <b>Corporate Office:</b>@ViewBag.CompanyName ,@ViewBag.CompanyAddress,@ViewBag.City1-@ViewBag.Pin1 ,<b>Contact no-</b>@ViewBag.ContactNo<br/>
+                <b>Website:</b>   @ViewBag.Website <br/>
+               
+            </td>
+        </tr>
+    </table>
+    @*==========================*@
+
+    @*<div>
+            <table style="border: 0px none black;">
+                <tbody>
+                    <tr style="border: 0px none black;">
+                        <td style="border: 0px none black;">
+                            <img src="../../Website/images/Logo.png">
+                        </td>
+                        <td style="border: 0px none black;"></td>
+
+                        <td style="border: 0px none black;"><h1>Shiv Garden House Projects </h1></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br />
+            <br />
+            <table style="width: 100%;" class="table table-striped">
+                <tr>
+                    <td><b>NAME:    </b>@ViewBag.CustomerName</td>
+                    <td><b>Customer Mobile No.   </b>@ViewBag.CustomerContact</td>
+                    <td><b>FATHER'S NAME: </b>@ViewBag.CustomerFatherName</td>
+                </tr>
+
+                <tr>
+                    <td><b>PIN CODE:    </b>@ViewBag.Pin</td>
+                    <td><b>STATE:    </b>@ViewBag.State</td>
+                    <td><b>CITY:    </b>@ViewBag.City</td>
+                </tr>
+                <tr>
+                    <td><b>ADDRESS:    </b>@ViewBag.Address</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            <br />
+            <table style="width: 100%;">
+
+                <tr>
+                    <td><b>CUSTOMER ID:    </b>@ViewBag.CustomerID</td>
+                    <td><b>PROJECT:    </b>@ViewBag.SiteName</td>
+                </tr>
+                <tr>
+                    <td><b>RECEIPT No.    </b>@ViewBag.ReceiptNo</td>
+                    <td><b>SECTOR:    </b>@ViewBag.SectorName</td>
+                </tr>
+                <tr>
+                    <td><b>RECEIPT PRINTED BY:   </b>@ViewBag.Name</td>
+                    <td><b>PLOT NO:    </b>@ViewBag.PlotNumber</td>
+                </tr>
+                <tr>
+                    <td><b>RECEIVED AMOUNT:     </b>@ViewBag.PaidAmount</td>
+                    <td><b>REMAINING AMOUNT:     </b>@ViewBag.RemainingAmount</td>
+
+
+                </tr>
+                <tr>
+                    <td><b>SIZE:    </b>@ViewBag.PlotArea</td>
+                    <td><b>CASH/CHEQUE/NEFT/RTGS /IMPS/DD:    </b>@ViewBag.PaymentMode  @ViewBag.BankDetails</td>
+
+                </tr>
+                <tr>
+                    <td><b>REASON OF PAYMENT:    </b>@ViewBag.ReasonOfPayment</td>
+                    <td><b>DATE:    </b>@ViewBag.PaymentDate</td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><b>Receipt Issue :    </b>@DateTime.Now.ToString("dd/MM/yyyy")</label>
+                    </div>
+                </div>
+                <div class="col-md-6 " style="text-align: right; width: 100%;">
+                    <div class="form-group">
+                        <label class="text-right float-right">Seal and Sign : </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-6 " style="text-align: right; width: 100%;">
+                    <div class="form-group">
+                        <label>Authorised Person : </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+                        <b>Corporate Office:</b>
+                        <br />
+                        @ViewBag.CompanyName
+                        <br />
+                        @ViewBag.CompanyAddress
+                        <br />
+                        @ViewBag.City1-@ViewBag.Pin1   <b>Contact no-</b>@ViewBag.ContactNo
+                        <br />
+                        <b>Website:</b>   @ViewBag.Website
+                        <br />
+                        <b>Email : </b>@ViewBag.EmailID
+                    </td>
+                </tr>
+            </table>
+
+        </div>*@
+</body>
+</html>

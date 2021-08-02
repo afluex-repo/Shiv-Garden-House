@@ -1,0 +1,44 @@
+﻿@model ShivGardenHouse.Models.DashBoard
+
+@{
+    ViewBag.Title = "Tree";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
+}
+
+
+
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="page-header-title">
+                    <h4 class="m-b-10">Level Tree</h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- HTML5 Export Buttons table start -->
+                        <div class="card">
+                            <div class="card-header table-card-header">
+
+                            </div>
+                            <div class="card-block">
+                                @Html.EJS().TreeView("treedata").AllowMultiSelection(true).Fields(field =>
+    field.Selected("is_selected").Id("id").ParentID("pid").Text("name").HasChildren("hasChild").Expanded("expanded")
+    .DataSource(ViewBag.dataSource)).Render()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
