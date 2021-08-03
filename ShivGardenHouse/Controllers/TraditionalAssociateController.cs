@@ -292,6 +292,7 @@ namespace ShivGardenHouse.Controllers
                     // obj.PanNo = r["PanNumber"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
+
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     lst.Add(obj);
                 }
