@@ -277,6 +277,7 @@ namespace ShivGardenHouse.Controllers
                     obj.AssociateID = r["AssociateId"].ToString();
                     obj.AssociateName = r["AssociateName"].ToString();
                     obj.SponsorID = r["SponsorId"].ToString();
+                    obj.Password =Crypto.Decrypt(r["Password"].ToString());
                     obj.SponsorName = r["SponsorName"].ToString();
                     //   obj.LoginID = r["LoginId"].ToString();
                     //  obj.DesignationID = r["FK_DesignationID"].ToString();
@@ -291,6 +292,7 @@ namespace ShivGardenHouse.Controllers
                     // obj.PanNo = r["PanNumber"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
+
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     lst.Add(obj);
                 }
