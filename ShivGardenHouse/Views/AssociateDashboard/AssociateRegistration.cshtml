@@ -1,7 +1,8 @@
-﻿@model ShivGardenHouse.Models.TraditionalAssociate
+﻿@model ShivGardenHouse.Models.AssociateBooking
+
 @{
     ViewBag.Title = "AssociateRegistration";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    Layout = "~/Views/Shared/AssociateLayout.cshtml";
 }
 <style>
     #divload {
@@ -18,7 +19,7 @@
 </style>
 <div class="loader" id="divload"></div>
 
-@using (Html.BeginForm("AssociateRegistration", "TraditionalAssociate", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AssociateRegistration", "AssociateDashboard", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
 
     <p style="color: red">
@@ -57,7 +58,7 @@
                                     <div class="form-group row">
                                         <div class="col-sm-3">
                                             <label class="float-label">Branch<span style="color:red">*</span></label>
-                                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                            @Html.DropDownListFor(m => m.BranchID, new SelectList(ViewBag.ddlBranch, "Value", "Text"), new { @class = "form-control"})
                                             <span class="form-bar"></span>
                                         </div>
                                         <div class="col-sm-3">
@@ -82,13 +83,13 @@
                                             @if (Model.DesignationID == null)
                                             {
                                                 <label class="float-label">Designation<span style="color:red">*</span></label>
-                                                @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" })
+                                                @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control" })
                                                 <span class="form-bar"></span>
                                             }
                                             else
                                             {
                                                 <label class="float-label">Designation<span style="color:red">*</span></label>
-                                                @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control", @onchange = "return onSiteChange();" ,@disabled= "disabled" })
+                                                @Html.DropDownListFor(m => m.DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control", @disabled = "disabled" })
                                                 <span class="form-bar"></span>
                                             }
 
@@ -154,16 +155,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6">
-                                            @if (Model.UserID == null)
-                                            {
-                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
-                                            }
-                                            else
-                                            {
-                                                @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
-                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateformForUpdate();" value="Update" id="btnUpdate" name="btnUpdate" />
-                                            }
-                                            <a class="btn btn-info" href="/TraditionalAssociate/AssociateList">Back To List</a>
+                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
                                         </div>
 
                                     </div>
@@ -175,18 +167,14 @@
             </div>
         </div>
     </div>
-
-
-
 }
-
 <script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
 <script>
 
     $(document).ready(function() {
-       
+
         $("#divload").css({ 'display': 'none' });
     });
 
@@ -194,7 +182,7 @@
         debugger
         var pincode = $('#Pincode').val();
         $.ajax({
-            url: '/Master/GetStateCity', type: 'post', dataType: 'json',
+            url: '/AssociateDashboard/GetStateCity', type: 'post', dataType: 'json',
             data: { 'Pincode': pincode },
             success: function (data) {
                 if (data.Result == "yes") {
@@ -223,7 +211,7 @@
         $("#divload").css({ 'display': '' });
         var sponsorID = $('#SponsorID').val();
         $.ajax({
-            url: '/TraditionalAssociate/GetSponsorName', type: 'post', dataType: 'json',
+            url: '/AssociateDashboard/GetSponsorName', type: 'post', dataType: 'json',
             data: { 'SponsorID': sponsorID },
             success: function (data) {
                 $("#divload").css({ 'display': 'none' });
@@ -311,42 +299,7 @@
         $("#divload").css({ 'display': '' });
         return true;
     }
-    function validateformForUpdate() {
-        $("#divload").css({ 'display': '' });
-        $(".errortext").removeClass("errortext");
-        if ($('#BranchID').val() == '0') {
-            $("#BranchID").addClass('errortext');
-            $('#BranchID').focus();
-            $("#divload").css({ 'display': 'none' });
-            //   alert("Please Select Branch .")
-            return false;
-        }
-        
-        if ($('#DesignationID').val() == '0') {
-            $("#DesignationID").addClass('errortext');
-            $('#DesignationID').focus();
-            $("#divload").css({ 'display': 'none' });
-            //   alert("Please Select Designation .")
-            return false;
-        }
-        if ($('#FirstName').val() == '') {
-            $("#FirstName").addClass('errortext');
-            $('#FirstName').focus();
-            $("#divload").css({ 'display': 'none' });
-            //  alert("Please Fill First Name .")
-            return false;
-        }
-        if ($('#Contact').val() == '') {
-            $("#Contact").addClass('errortext');
-            $('#Contact').focus();
-            $("#divload").css({ 'display': 'none' });
-            //  alert("Please Fill Mobile Number .")
-            return false;
-        }
-       
-        $("#divload").css({ 'display': '' });
-        return true;
-    }
+  
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode != 46 && charCode > 31
@@ -395,4 +348,3 @@
         background-color: #fff0f0 !important;
     }
 </style>
-

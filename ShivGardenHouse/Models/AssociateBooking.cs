@@ -16,7 +16,9 @@ namespace ShivGardenHouse.Models
         public string AmountType { get; set; }
         public string DepositAmount { get; set; }
         public string IncomeType { get; set; }
-
+        
+        public string SponsorDesignationID { get; set; }
+        public List<SelectListItem> ddlDesignation { get; set; }
         public List<AssociateBooking> ClosingWisePayoutlist { get; set; }
         public string CommPercentage { get; set; }
         public string PK_PaidPayoutId { get; set; }
@@ -71,7 +73,12 @@ namespace ShivGardenHouse.Models
         public List<AssociateBooking> lstPlot { get; set; }
         public string BookingStatus { get; set; }
         #endregion
-
+        public DataSet GetAssociateList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID", LoginId) };
+            DataSet ds = Connection.ExecuteQuery("AssociateListTraditional", para);
+            return ds;
+        }
         public DataSet GetPayoutWiseIncomeDetails()
         {
             SqlParameter[] para = {
@@ -282,6 +289,7 @@ namespace ShivGardenHouse.Models
         public string PanNo { get; set; }
 
         public string Address { get; set; }
+        public string FatherName { get; set; }
 
 
         #region EditProfile
@@ -338,12 +346,68 @@ namespace ShivGardenHouse.Models
         public string NewsBody { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public string JoiningFromDate { get; set; }
+        public string PanImage { get; set; }
+        public string JoiningToDate { get; set; }
         public DataSet GetSiteList()
         {
             DataSet ds = Connection.ExecuteQuery("SiteList");
             return ds;
         }
 
+        public DataSet AssociateRegistration()
+        {
+            SqlParameter[] para = { new SqlParameter("@BranchID", BranchID) ,
+                                  new SqlParameter("@SponsorID", UserID) ,
+                                  new SqlParameter("@DesignationID", DesignationID) ,
+                                  new SqlParameter("@RoleID", 2) ,
+                                  new SqlParameter("@FirstName", FirstName) ,
+                                  new SqlParameter("@LastName", LastName) ,
+                                  new SqlParameter("@Contact", Contact) ,
+                                  new SqlParameter("@Email", Email) ,
+                                  new SqlParameter("@Pincode", Pincode) ,
+                                  new SqlParameter("@State", State) ,
+                                  new SqlParameter("@City", City) ,
+                                  new SqlParameter("@Address", Address) ,
+                                  new SqlParameter("@PanNo", PanNo) ,
+                                  new SqlParameter("@PanImage", PanImage) ,
+                                  new SqlParameter("@AddedBy", AddedBy) ,
+                                  new SqlParameter("@Password", Password) ,
+                                    new SqlParameter("@FatherName", FatherName) ,
+                                  };
+            DataSet ds = Connection.ExecuteQuery("AssociateRegistrationTraditional", para);
+            return ds;
+        }
+        public DataSet GetBranchList()
+        {
+            DataSet ds = Connection.ExecuteQuery("GetBranchList");
+            return ds;
+        }
+        public DataSet GetDesignationList()
+        {
+
+            SqlParameter[] para = {
+
+                                      new SqlParameter("@Percentage", Percentage)
+
+                                  };
+            DataSet ds = Connection.ExecuteQuery("GetDesignationList", para);
+
+            return ds;
+        }
+        public DataSet GetListforAssociate()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_UserId", UserID),
+                                  new SqlParameter("@AssociateLoginID", AssociateID),
+                                  new SqlParameter("@AssociateName", AssociateName),
+                                  new SqlParameter("@SponsorLoginID", SponsorID),
+                                  new SqlParameter("@SponsorName", SponsorName),
+                                  new SqlParameter("@FromDate", JoiningFromDate),
+                                  new SqlParameter("@ToDate", JoiningToDate)
+                                  };
+            DataSet ds = Connection.ExecuteQuery("SelectAssociate", para);
+            return ds;
+        }
 
         public DataSet GetDownlineTree()
         {

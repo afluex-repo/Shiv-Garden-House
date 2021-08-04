@@ -1390,6 +1390,8 @@
     <Content Include="Website\popup\Popup.css" />
     <Content Include="Website\popup\preload.gif" />
     <Content Include="Website\popup\tinybox.js" />
+    <Content Include="Views\AssociateDashboard\AssociateRegistration.cshtml" />
+    <Content Include="Views\AssociateDashboard\ConfirmRegistration.cshtml" />
     <None Include="Web.ShivGardenHouse.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

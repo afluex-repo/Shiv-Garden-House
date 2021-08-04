@@ -9,7 +9,7 @@ using ShivGardenHouse.Models;
 
 namespace ShivGardenHouse.Controllers
 {
-    public class TransactionController : Controller
+    public class TransactionController : BaseController
     {
         #region LoginAssociate
         public ActionResult AssociateLogin()
