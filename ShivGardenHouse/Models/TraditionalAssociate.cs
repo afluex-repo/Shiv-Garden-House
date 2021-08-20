@@ -40,6 +40,8 @@ namespace ShivGardenHouse.Models
         public string BranchName { get; set; }
         public string Pin { get; set; }
         public string DesignationName { get; set; }
+        public string PK_DesignationID { get; set; }
+        public string AdharNo { get; set; }
         public List<TraditionalAssociate> lstTrad { get; set; }
         public List<SelectListItem> ddlDesignation { get; set; }
         #endregion
@@ -63,7 +65,7 @@ namespace ShivGardenHouse.Models
         {
 
             SqlParameter[] para = {
-                                      
+                                      new SqlParameter("@PK_DesignationID", PK_DesignationID),
                                       new SqlParameter("@Percentage", Percentage)
                                   
                                   };
@@ -71,7 +73,14 @@ namespace ShivGardenHouse.Models
 
             return ds;
         }
-
+        public DataSet GetAdharDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AdharNumber", AdharNo)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetAdharDetails", para);
+            return ds;
+        }
         public DataSet AssociateRegistration()
         {
             SqlParameter[] para = { new SqlParameter("@BranchID", BranchID) ,
@@ -87,6 +96,7 @@ namespace ShivGardenHouse.Models
                                   new SqlParameter("@City", City) ,
                                   new SqlParameter("@Address", Address) ,
                                   new SqlParameter("@PanNo", PanNo) ,
+                                   new SqlParameter("@AdharNo",AdharNo) ,
                                   new SqlParameter("@PanImage", PanImage) ,
                                   new SqlParameter("@AddedBy", AddedBy) ,
                                   new SqlParameter("@Password", Password) ,

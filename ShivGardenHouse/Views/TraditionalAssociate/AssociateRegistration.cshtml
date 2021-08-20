@@ -49,6 +49,7 @@
                                     <h5>Add New Associate</h5>
                                     <p style="color: red">
                                         @TempData["Registration"]
+                                        @TempData["Message"]
                                     </p>
                                     <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
                                 </div>
@@ -146,7 +147,17 @@
                                             @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father's Name" })
                                             <span class="form-bar"></span>
                                         </div>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Adhar No</label>
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ",@maxlength = "12",@onkeypress = "return isNumberOrDecimal(event);" ,@onchange = "return validateAdhar();" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Password</label>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-6">
                                             <label class="float-label">Address</label>
                                             @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
                                             <span class="form-bar"></span>
@@ -218,7 +229,23 @@
 
         });
     }
-
+    function validateAdhar() {
+        var AdharNumber = $('#AdharNo').val();
+        $.ajax({
+            url: '/TraditionalAssociate/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNo').val(AdharNumber);
+                }
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNo").val('');
+                    $("#AdharNo").addClass('errortext');
+                }
+            }
+        });
+    }
     function getSponsorName() {
         $("#divload").css({ 'display': '' });
         var sponsorID = $('#SponsorID').val();
@@ -256,7 +283,6 @@
 
         });
     }
-
     function validateform() {
         $("#divload").css({ 'display': '' });
         $(".errortext").removeClass("errortext");
