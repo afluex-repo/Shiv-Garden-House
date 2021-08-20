@@ -193,7 +193,7 @@ namespace ShivGardenHouse.Controllers
                         string mailbody = "";
                         try
                         {
-                            mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as ShivGardenHouse Partner.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                            mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as ShivGardenHouse Associate.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
 
                             //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
                             //var toAddress = new MailAddress(model.Email);
@@ -492,7 +492,7 @@ namespace ShivGardenHouse.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["BlockUnblock"] = "Partner details deleted successfully";
+                        TempData["BlockUnblock"] = "Associate details deleted successfully";
                         FormName = "AssociateList";
                         Controller = "TraditionalAssociate";
                     }
