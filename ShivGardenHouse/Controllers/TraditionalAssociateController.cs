@@ -132,9 +132,9 @@ namespace ShivGardenHouse.Controllers
 
                     DataSet dsdesignation = model.GetDesignationList();
                     List<SelectListItem> ddlDesignation = new List<SelectListItem>();
-                    if (dsSponsorName != null && dsSponsorName.Tables.Count > 0 && dsSponsorName.Tables[1].Rows.Count > 0)
+                    if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
                     {
-                        foreach (DataRow r in dsSponsorName.Tables[1].Rows)
+                        foreach (DataRow r in dsdesignation.Tables[0].Rows)
                         {
                             if (desgnationCount == 0)
                             {
@@ -174,9 +174,16 @@ namespace ShivGardenHouse.Controllers
             string Controller = "";
             try
             {
-                Random rnd = new Random();
-                int ctrPasword = rnd.Next(111111, 999999);
-                model.Password = Crypto.Encrypt(ctrPasword.ToString());
+                if(model.Password =="" || model.Password==null)
+                {
+                    Random rnd = new Random();
+                    int ctrPasword = rnd.Next(111111, 999999);
+                    model.Password = Crypto.Encrypt(ctrPasword.ToString());
+                }
+                else
+                {
+                    model.Password = Crypto.Encrypt(model.Password).ToString();
+                }
                 model.AddedBy = Session["Pk_AdminId"].ToString();
                 DataSet dsRegistration = model.AssociateRegistration();
                 if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
@@ -216,6 +223,8 @@ namespace ShivGardenHouse.Controllers
                            
                         }
                     }
+                    FormName = "ConfirmRegistration";
+                    Controller = "TraditionalAssociate";
                 }
                 if (dsRegistration != null && dsRegistration.Tables.Count > 0)
                 {
@@ -239,10 +248,14 @@ namespace ShivGardenHouse.Controllers
                             BLSMS.SendSMS(mob, str);
                         }
                         catch { }
+                        FormName = "ConfirmRegistration";
+                        Controller = "TraditionalAssociate";
                     }
                     else
                     {
                         TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "AssociateRegistration";
+                        Controller = "TraditionalAssociate";
                     }
                 }
             }
@@ -250,12 +263,42 @@ namespace ShivGardenHouse.Controllers
             {
                 TempData["Registration"] = ex.Message;
             }
-            FormName = "ConfirmRegistration";
-            Controller = "TraditionalAssociate";
+           
 
             return RedirectToAction(FormName, Controller);
         }
+        public ActionResult GetAdharDetails(string AdharNumber)
+        {
+            try
+            {
+                TraditionalAssociate model = new TraditionalAssociate();
+                model.AdharNo = AdharNumber;
+                #region GetAdharDetails
+                DataSet dsadhardetails = model.GetAdharDetails();
+                if (dsadhardetails != null && dsadhardetails.Tables[0].Rows.Count > 0)
+                {
+                    if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
 
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
         public ActionResult ConfirmRegistration()
         {
             return View();
