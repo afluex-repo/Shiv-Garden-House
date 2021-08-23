@@ -1256,9 +1256,9 @@ namespace ShivGardenHouse.Controllers
 
                     DataSet dsdesignation = model.GetDesignationList();
                     List<SelectListItem> ddlDesignation = new List<SelectListItem>();
-                    if (dsSponsorName != null && dsSponsorName.Tables.Count > 0 && dsSponsorName.Tables[1].Rows.Count > 0)
+                    if (dsdesignation != null && dsdesignation.Tables.Count > 0 && dsdesignation.Tables[0].Rows.Count > 0)
                     {
-                        foreach (DataRow r in dsSponsorName.Tables[1].Rows)
+                        foreach (DataRow r in dsdesignation.Tables[0].Rows)
                         {
                             if (desgnationCount == 0)
                             {
