@@ -42,6 +42,15 @@ namespace ShivGardenHouse.Models
         public string DesignationName { get; set; }
         public string PK_DesignationID { get; set; }
         public string AdharNo { get; set; }
+
+        public string BankHolderName { get; set; }
+        public string MemberAccNo { get; set; }
+        public string MemberBankName { get; set; }
+        public string MemberBranch { get; set; }
+        public string IFSCCode { get; set; }
+        public string GaurdianName { get; set; }
+
+
         public List<TraditionalAssociate> lstTrad { get; set; }
         public List<SelectListItem> ddlDesignation { get; set; }
         #endregion
@@ -101,6 +110,12 @@ namespace ShivGardenHouse.Models
                                   new SqlParameter("@AddedBy", AddedBy) ,
                                   new SqlParameter("@Password", Password) ,
                                     new SqlParameter("@FatherName", FatherName) ,
+                                     new SqlParameter("@BankHolderName", BankHolderName) ,
+                                      new SqlParameter("@MemberAccNo",MemberAccNo) ,
+                                       new SqlParameter("@MemberBankName", MemberBankName) ,
+                                        new SqlParameter("@MemberBranch", MemberBranch) ,
+                                         new SqlParameter("@IFSCCode", IFSCCode) ,
+                                          new SqlParameter("@GaurdianName", GaurdianName) 
                                   };
             DataSet ds = Connection.ExecuteQuery("AssociateRegistrationTraditional", para);
             return ds;

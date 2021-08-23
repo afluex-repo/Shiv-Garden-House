@@ -154,31 +154,74 @@
                                         </div>
                                         <div class="col-sm-3">
                                             <label class="float-label">Password</label>
-                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password" })
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password",@maxlength="6" })
                                             <span class="form-bar"></span>
                                         </div>
-                                        <div class="col-sm-6">
+                                        @*<div class="col-sm-6">
                                             <label class="float-label">Address</label>
                                             @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                            <span class="form-bar"></span>
+                                        </div>*@
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Bank Holder Name</label>
+                                            @Html.TextBoxFor(m => m.BankHolderName, new { @class = "form-control", @Placeholder = "Bank Holder Name" })
                                             <span class="form-bar"></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-6">
-                                            @if (Model.UserID == null)
-                                            {
-                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
-                                            }
-                                            else
-                                            {
-                                                @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
-                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateformForUpdate();" value="Update" id="btnUpdate" name="btnUpdate" />
-                                            }
-                                            <a class="btn btn-info" href="/TraditionalAssociate/AssociateList">Back To List</a>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Account No</label>
+                                            @Html.TextBoxFor(m => m.MemberAccNo, new { @class = "form-control", @Placeholder = "Member Account No" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Bank Name</label>
+                                            @Html.TextBoxFor(m => m.MemberBankName, new { @class = "form-control", @Placeholder = "Member Bank Name" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Branch</label>
+                                            @Html.TextBoxFor(m => m.MemberBranch, new { @class = "form-control", @Placeholder = "Member Branch" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">IFSCCode</label>
+                                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSCCode" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                    </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <label class="float-label">Gaurdian Name</label>
+                                                @Html.TextBoxFor(m => m.GaurdianName, new { @class = "form-control", @Placeholder = "Gaurdian Name" })
+                                                <span class="form-bar"></span>
+                                            </div>
+
+                                            <div class="col-sm-9">
+                                                <label class="float-label">Address</label>
+                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                                <span class="form-bar"></span>
+                                            </div>
                                         </div>
 
+                                 
+
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                @if (Model.UserID == null)
+                                                {
+                                                    <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnRegistration" />
+                                                }
+                                                else
+                                                {
+                                                    @Html.HiddenFor(m => m.UserID, new { @Value = @Model.UserID })
+                                                    <input class="btn btn-success pull-right" type="submit" onclick="return validateformForUpdate();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                                }
+                                                <a class="btn btn-info" href="/TraditionalAssociate/AssociateList">Back To List</a>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -373,6 +416,7 @@
         $("#divload").css({ 'display': '' });
         return true;
     }
+
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode != 46 && charCode > 31
