@@ -148,13 +148,13 @@
                                             <span class="form-bar"></span>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label class="float-label">Adhar No</label>
-                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ",@maxlength = "12",@onkeypress = "return isNumberOrDecimal(event);" ,@onchange = "return validateAdhar();" })
+                                            <label class="float-label">Nomani</label>
+                                            @Html.TextBoxFor(m => m.Nomani, new { @class = "form-control", @Placeholder = "Nomani" })
                                             <span class="form-bar"></span>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label class="float-label">Password</label>
-                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password",@maxlength="6" })
+                                            <label class="float-label">Adhar No <span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
                                             <span class="form-bar"></span>
                                         </div>
                                         @*<div class="col-sm-6">
@@ -192,11 +192,10 @@
                                     </div>
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <label class="float-label">Nomani</label>
-                                                @Html.TextBoxFor(m => m.Nomani, new { @class = "form-control", @Placeholder = "Nomani" })
+                                                <label class="float-label">Password</label>
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @maxlength = "6" })
                                                 <span class="form-bar"></span>
                                             </div>
-
                                             <div class="col-sm-9">
                                                 <label class="float-label">Address</label>
                                                 @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
@@ -365,12 +364,12 @@
             //  alert("Please Fill Mobile Number .")
             return false;
         }
-        //if ($('#PanNo').val() == '') {
-        //    $("#PanNo").addClass('errortext');
-        //    $('#PanNo').focus();
-        //    //    alert("Please Fill PAN .")
-        //    return false;
-        //}
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
         //if ($('#Pincode').val() == '') {
         //    $("#Pincode").addClass('errortext');
         //    $('#Pincode').focus();

@@ -333,9 +333,10 @@ namespace ShivGardenHouse.Controllers
                     obj.State = r["State"].ToString();
                     obj.Address = r["Address"].ToString();
                     // obj.PanNo = r["PanNumber"].ToString();
+                    obj.Nomani = r["Nomani"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
-
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     lst.Add(obj);
                 }
@@ -348,7 +349,8 @@ namespace ShivGardenHouse.Controllers
         [OnAction(ButtonName = "btnSearchCustomer")]
         public ActionResult AssociateList(TraditionalAssociate model)
         {
-            List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
+            
+List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
             DataSet ds = model.GetList();
 
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -367,6 +369,7 @@ namespace ShivGardenHouse.Controllers
                    // obj.FirstName = r["AName"].ToString();
                     obj.isBlocked = r["isBlocked"].ToString();
                     obj.Contact = r["Mobile"].ToString();
+                    obj.Nomani = r["Nomani"].ToString();
                     obj.Email = r["Email"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
                     obj.City = r["City"].ToString();
@@ -375,6 +378,7 @@ namespace ShivGardenHouse.Controllers
                    // obj.PanNo = r["PanNumber"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
+                    obj.Password = Crypto.Decrypt(r["Password"].ToString());
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     lst.Add(obj);
                 }
