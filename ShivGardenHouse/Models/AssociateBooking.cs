@@ -44,6 +44,7 @@ namespace ShivGardenHouse.Models
         public string CustomerLoginID { get; set; }
         public string CustomerName { get; set; }
         public string AssociateID { get; set; }
+        public string PK_DesignationID { get; set; }
         public string AssociateLoginID { get; set; }
         public string AssociateName { get; set; }
         public string SiteID { get; set; }
@@ -387,7 +388,7 @@ namespace ShivGardenHouse.Models
         {
 
             SqlParameter[] para = {
-
+                        new SqlParameter("@PK_DesignationID", PK_DesignationID),
                                       new SqlParameter("@Percentage", Percentage)
 
                                   };
