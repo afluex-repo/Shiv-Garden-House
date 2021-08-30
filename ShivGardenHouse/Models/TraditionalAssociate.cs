@@ -48,7 +48,9 @@ namespace ShivGardenHouse.Models
         public string MemberBankName { get; set; }
         public string MemberBranch { get; set; }
         public string IFSCCode { get; set; }
-        public string Nomani { get; set; }
+        public string Nominee { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
 
 
         public List<TraditionalAssociate> lstTrad { get; set; }
@@ -115,7 +117,9 @@ namespace ShivGardenHouse.Models
                                        new SqlParameter("@MemberBankName", MemberBankName) ,
                                         new SqlParameter("@MemberBranch", MemberBranch) ,
                                          new SqlParameter("@IFSCCode", IFSCCode) ,
-                                          new SqlParameter("@Nomani",Nomani) 
+                                          new SqlParameter("@Nominee",Nominee),
+                                           new SqlParameter("@NomineeAge",NomineeAge),
+                                            new SqlParameter("@NomineeRelation",NomineeRelation)
                                   };
             DataSet ds = Connection.ExecuteQuery("AssociateRegistrationTraditional", para);
             return ds;
@@ -153,6 +157,9 @@ namespace ShivGardenHouse.Models
                                   new SqlParameter("@PanNumber", PanNo) ,
                                   new SqlParameter("@UpdatedBy", AddedBy) ,
                                       new SqlParameter("@FatherName", FatherName) ,
+                                       new SqlParameter("@Nominee", Nominee) ,
+                                        new SqlParameter("@NomineeAge", NomineeAge) ,
+                                         new SqlParameter("@NomineeRelation", NomineeRelation) 
                                   };
             DataSet ds = Connection.ExecuteQuery("UpdateAssociateRegistrationDetails", para);
             return ds;

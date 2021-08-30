@@ -148,7 +148,7 @@
                                             <span class="form-bar"></span>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label class="float-label">Adhar No</label>
+                                            <label class="float-label">Adhar No<span style="color:red">*</span></label>
                                             @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ",@maxlength = "12",@onkeypress = "return isNumberOrDecimal(event);" ,@onchange = "return validateAdhar();" })
                                             <span class="form-bar"></span>
                                         </div>
@@ -190,21 +190,31 @@
                                             <span class="form-bar"></span>
                                         </div>
                                     </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label class="float-label">Nomani</label>
-                                                @Html.TextBoxFor(m => m.Nomani, new { @class = "form-control", @Placeholder = "Nomani" })
-                                                <span class="form-bar"></span>
-                                            </div>
-
-                                            <div class="col-sm-9">
-                                                <label class="float-label">Address</label>
-                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
-                                                <span class="form-bar"></span>
-                                            </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <label class="float-label">Address</label>
+                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                            <span class="form-bar"></span>
                                         </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee</label>
+                                            @Html.TextBoxFor(m => m.Nominee, new { @class = "form-control", @Placeholder = "Nominee" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee Age</label>
+                                            @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @Placeholder = "Nominee Age" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee Relation</label>
+                                            @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @Placeholder = "Nominee Relation" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                    </div>
 
-                                 
 
                                         <div class="form-group row">
                                             <div class="col-md-6">
@@ -361,6 +371,13 @@
         if ($('#Contact').val() == '') {
             $("#Contact").addClass('errortext');
             $('#Contact').focus();
+            $("#divload").css({ 'display': 'none' });
+            //  alert("Please Fill Mobile Number .")
+            return false;
+        }
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
             $("#divload").css({ 'display': 'none' });
             //  alert("Please Fill Mobile Number .")
             return false;
