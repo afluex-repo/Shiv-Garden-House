@@ -47,6 +47,10 @@ namespace ShivGardenHouse.Controllers
                         model.PanNo = dsPlotDetails.Tables[0].Rows[0]["PanNumber"].ToString();
                         model.BranchName = dsPlotDetails.Tables[0].Rows[0]["BranchName"].ToString();
                         model.FatherName = dsPlotDetails.Tables[0].Rows[0]["FathersName"].ToString();
+                        model.Nominee = dsPlotDetails.Tables[0].Rows[0]["Nominee"].ToString();
+                        model.NomineeAge = dsPlotDetails.Tables[0].Rows[0]["NomineeAge"].ToString();
+                        model.NomineeRelation = dsPlotDetails.Tables[0].Rows[0]["NomineeRelation"].ToString();
+
                         //   ViewBag.Disabled = "disabled";
 
                     }
@@ -337,6 +341,8 @@ namespace ShivGardenHouse.Controllers
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
+                    obj.Nominee = r["Nominee"].ToString();
+
                     obj.EncryptKey = Crypto.Encrypt(r["PK_UserId"].ToString());
                     lst.Add(obj);
                 }
