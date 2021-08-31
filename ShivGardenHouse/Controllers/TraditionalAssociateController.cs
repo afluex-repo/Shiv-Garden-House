@@ -337,7 +337,7 @@ namespace ShivGardenHouse.Controllers
                     obj.State = r["State"].ToString();
                     obj.Address = r["Address"].ToString();
                     // obj.PanNo = r["PanNumber"].ToString();
-                    obj.Nomani = r["Nomani"].ToString();
+                    //obj.Nomani = r["Nomani"].ToString();
                     obj.BranchName = r["BranchName"].ToString();
                     obj.DesignationName = r["DesignationName"].ToString();
                     obj.Password = Crypto.Decrypt(r["Password"].ToString());
@@ -375,7 +375,7 @@ List<TraditionalAssociate> lst = new List<TraditionalAssociate>();
                    // obj.FirstName = r["AName"].ToString();
                     obj.isBlocked = r["isBlocked"].ToString();
                     obj.Contact = r["Mobile"].ToString();
-                    obj.Nomani = r["Nomani"].ToString();
+                    //obj.Nomani = r["Nomani"].ToString();
                     obj.Email = r["Email"].ToString();
                     obj.PanNo = r["PanNumber"].ToString();
                     obj.City = r["City"].ToString();
