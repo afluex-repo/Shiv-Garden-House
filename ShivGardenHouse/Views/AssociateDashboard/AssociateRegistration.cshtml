@@ -147,19 +147,82 @@
                                             @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @Placeholder = "Father's Name" })
                                             <span class="form-bar"></span>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <label class="float-label">Address</label>
-                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Adhar No <span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Bank Holder Name</label>
+                                            @Html.TextBoxFor(m => m.BankHolderName, new { @class = "form-control", @Placeholder = "Bank Holder Name" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Account No</label>
+                                            @Html.TextBoxFor(m => m.MemberAccNo, new { @class = "form-control", @Placeholder = "Member Account No" })
                                             <span class="form-bar"></span>
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
-                                        <div class="col-md-6">
-                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Bank Name</label>
+                                            @Html.TextBoxFor(m => m.MemberBankName, new { @class = "form-control", @Placeholder = "Member Bank Name" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Member Branch</label>
+                                            @Html.TextBoxFor(m => m.MemberBranch, new { @class = "form-control", @Placeholder = "Member Branch" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">IFSCCode</label>
+                                            @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @Placeholder = "IFSCCode" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Password</label>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Placeholder = "Password", @maxlength = "6" })
+                                            <span class="form-bar"></span>
                                         </div>
 
                                     </div>
-                                </div>
+
+                                        <div class="form-group row">
+                                            <div class="col-sm-12">
+                                                <label class="float-label">Address</label>
+                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @Placeholder = "Address" })
+                                                <span class="form-bar"></span>
+                                            </div>
+                                        </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee</label>
+                                            @Html.TextBoxFor(m => m.Nominee, new { @class = "form-control", @Placeholder = "Nominee" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee Age</label>
+                                            @Html.TextBoxFor(m => m.NomineeAge, new { @class = "form-control", @Placeholder = "Nominee Age" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Nominee Relation</label>
+                                            @Html.TextBoxFor(m => m.NomineeRelation, new { @class = "form-control", @Placeholder = "Nominee Relation" })
+                                            <span class="form-bar"></span>
+                                        </div>
+
+                                    </div>
+
+
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <input class="btn btn-success pull-right" type="submit" onclick="return validateform();" value="Save" id="btnSave" name="btnSave" />
+                                            </div>
+
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -289,12 +352,11 @@
         //    //    alert("Please Fill PAN .")
         //    return false;
         //}
-        //if ($('#Pincode').val() == '') {
-        //    $("#Pincode").addClass('errortext');
-        //    $('#Pincode').focus();
-        //    //    alert("Please Enter Pin Code")
-        //    return false;
-        //}
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
+            return false;
+        }
         $("#divload").css({ 'display': '' });
         return true;
     }
@@ -337,6 +399,23 @@
             $("#PanNo").val('');
             $("#PanNo").addClass('errortext');
         }
+    }
+    function validateAdhar() {
+        var AdharNumber = $('#AdharNo').val();
+        $.ajax({
+            url: '/AssociateDashboard/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNo').val(AdharNumber);
+                }
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNo").val('');
+                    $("#AdharNo").addClass('errortext');
+                }
+            }
+        });
     }
 </script>
 
