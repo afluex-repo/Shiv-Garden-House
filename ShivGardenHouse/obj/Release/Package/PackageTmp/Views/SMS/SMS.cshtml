@@ -1,0 +1,245 @@
+﻿@model ShivGardenHouse.Models.SMS
+
+@{
+    ViewBag.Title = "SMS";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("SMS", "SMS", FormMethod.Post, new { @id = "formid" }))
+{
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Send SMS</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Add New SMS Template</h5>
+                                    <p style="color: red">
+                                        @TempData["SMS"]
+                                    </p>
+                                    <!--<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>-->
+                                </div>
+                                <div class="card-block">
+
+
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <div class="form-group ">
+                                                <label>Select Message Template  <span style="color: red">*</span></label>
+                                                @Html.DropDownListFor(m => m.TemplateName, new SelectList(ViewBag.ddlSMSTemplateName, "Value", "Text"), new { @class = "form-control", @onchange = "getsms();" })
+                                            </div>
+
+                                            @Html.TextBoxFor(m => m.MessageCount, new { @class = "form-control", @Placeholder = "MessageCount", @readonly = "readonly" })
+
+                                            @Html.TextBoxFor(m => m.TotalSMS, new { @class = "form-control", @Placeholder = "TotalSMS", @readonly = "readonly" })
+
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label> Message</label>
+                                                @Html.TextAreaFor(m => m.Msg, new { @class = "form-control", @Placeholder = "Message", @Rows = "7", @cols = "20", @onkeypress = "return countChar(this)", @onchange = "return countChar(this)" })
+                                                @Html.HiddenFor(m => m.TemplateNameText)
+
+                                               </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label> Select Associate/Customer </label>
+                                                @Html.DropDownListFor(m => m.AssocCustom, new SelectList(ViewBag.ddlAssocCustom, "Value", "Text"), new { @class = "form-control", @onchange = "getsms();" })
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-group ">
+                                                <br />
+                                                <input type="submit" id="GetDetails" name="GetDetails" value="Get Details" class="btn btn-info" onclick="return fvalidate();" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                @if (Model != null)
+                                {
+                                    if (Model.lstsmsdata != null)
+                                    {
+                                        int i = 1;
+                                        @*<div class="card-footer text-left">
+                                            <input type="submit" id="SendSMS1" name="SendSMS1" value="Send SMS" class="btn btn-primary" onclick="return fvalidatesave();" />
+                                        </div>*@
+                                        <div class="table-responsive" style="height: 1014px; overflow-y: scroll;">
+                                            <table class="table datatable display responsive w-100 dataTable no-footer dtr-inline" style="width: 1002px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.no</th>
+                                                        <th>Login Id</th>
+                                                        <th>Name</th>
+                                                        <th> Select All&nbsp;&nbsp; <input type="checkbox" name="checkedAll" id="checkedAll" style="margin-top:3px;" /></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @foreach (var item in Model.lstsmsdata)
+                                                    {
+
+                                                        <tr>
+                                                            <td>
+                                                                @i
+
+                                                            </td>
+                                                            <td>
+                                                                @item.LoginId
+                                                            </td>
+                                                            <td>
+                                                                @item.FirstName
+                                                            </td>
+                                                            <td>
+                                                                @item.Mobile
+                                                            </td>
+                                                            <td>
+                                                                <input type="checkbox" class="chkclass" id="chk_@i" name="chk_@i" />
+                                                                <input type="hidden" id="FirstName_@i" name="FirstName_@i" value="@item.FirstName" />
+                                                                <input type="hidden" id="LoginId_@i" name="LoginId_@i" value="@item.LoginId" />
+                                                                <input type="hidden" id="Mobile_@i" name="Mobile_@i" value="@item.Mobile" />
+                                                            </td>
+
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                    <input type="hidden" name="Hdrows" id="Hdrows" value="@i" />
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
+                                        <div class="card-footer text-left">
+                                            <input type="submit" id="SendSMS" name="SendSMS" value="Send SMS" class="btn btn-primary" onclick="return fvalidatesave();" />
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+<script>
+    function getsms() {
+        var sms = $('#TemplateName').val();
+        var smstext = $("#TemplateName option:selected").text();
+        $('#Msg').val(sms);
+        $('#TemplateNameText').val(smstext);
+        countChar();
+    }
+    function fvalidate() {
+        $(".errortext").removeClass("errortext");
+
+        if ($('#TemplateName').val() == '') {
+            $("#TemplateName").addClass('errortext');
+            $('#TemplateName').focus();
+            return false;
+        }
+        if ($('#AssocCustom').val() == 0) {
+            $("#AssocCustom").addClass('errortext');
+            $('#AssocCustom').focus();
+            return false;
+        }
+        if ($('#Msg').val() == '') {
+            $("#Msg").addClass('errortext');
+            $('#Msg').focus();
+            return false;
+        }
+        return true;
+    }
+
+    function countChar(val) {
+
+        var len = $('#Msg').val().length;
+        var ctext =len + " Chars";
+        //var str = $('#SchoolName').val().length + $('#SMS').val().length;
+        var str = $('#Msg').val();
+        var parts = [];
+        var partSize = 160;
+
+        while (str) {
+            if (str.length < partSize) {
+                var rtext = (partSize - str.length) + " Chars Remaining";
+                parts.push(str);
+                break;
+            }
+            else {
+                parts.push(str.substr(0, partSize));
+                str = str.substr(partSize);
+            }
+
+
+
+        }
+        var ptext = parts.length ;
+
+
+        $('#MessageCount').val(ctext);
+
+        $('#TotalSMS').val(ptext);
+
+
+    }
+
+
+
+    function fvalidatesave() {
+        $(".errortext").removeClass("errortext");
+        if ($('#TemplateName').val() == "0") {
+            $("#TemplateName").addClass('errortext');
+            $('#TemplateName').focus();
+            return false;
+        }
+        if ($('#AssocCustom').val() == 0) {
+            $("#AssocCustom").addClass('errortext');
+            $('#AssocCustom').focus();
+            return false;
+        }
+        if ($('#Msg').val() == "") {
+            $("#Msg").addClass('errortext');
+            $('#Msg').focus();
+            return false;
+        }
+
+        if (($("input[name*='chk_']:checked").length) <= 0) {
+            alert("You must check at least 1 Student to send the message");
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+    }
+  
+</script>

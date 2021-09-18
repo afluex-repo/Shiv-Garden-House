@@ -114,6 +114,13 @@
                                             @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control", @Placeholder = "Pincode", @onchange = "return getStateCity();", @onkeypress = "return isNumberOrDecimal(event);", @maxlength = "6" })
                                             <span class="form-bar"></span>
                                         </div>
+
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Adhar No <span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.AdharNo, new { @class = "form-control", @Placeholder = "Adhar No ", @maxlength = "12", @onkeypress = "return isNumberOrDecimal(event);", @onchange = "return validateAdhar();" })
+                                            <span class="form-bar"></span>
+                                        </div>
+
                                         <div class="col-sm-3">
                                             <label class="float-label">State</label>
                                             @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Placeholder = "State", @readonly = "readonly" })
@@ -277,9 +284,41 @@
             $('#Pincode').focus();
             return false;
         }
+        if ($('#AdharNo').val() == '') {
+            $("#AdharNo").addClass('errortext');
+            $('#AdharNo').focus();
+            return false;
+        }
+
+
         $("#divload").css({ 'display': '' });
         return true;
     }
+
+
+    function validateAdhar() {
+        var AdharNumber = $('#AdharNo').val();
+        $.ajax({
+            url: '/Customer/GetAdharDetails', type: 'post', dataType: 'json',
+            data: { 'AdharNumber': AdharNumber },
+            success: function (data) {
+                if (data.Result == "yes") {
+                    $('#AdharNo').val(AdharNumber);
+                }
+                else if (data.Result == "no") {
+                    alert("Adhar No already registred another ID try another no.!!");
+                    $("#AdharNo").val('');
+                    $("#AdharNo").addClass('errortext');
+                }
+            }
+        });
+    }
+
+
+
+
+
+
 
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
