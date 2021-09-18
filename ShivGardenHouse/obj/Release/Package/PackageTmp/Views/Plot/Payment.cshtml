@@ -1,0 +1,270 @@
+﻿@model ShivGardenHouse.Models.Plot
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../../images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+<div class="loader" id="divload" ></div>
+@using (Html.BeginForm("Payment", "Plot", FormMethod.Post, new { @id = "form1" }))
+{
+ 
+    <p style="color: red">
+        @TempData["Plot"]
+    </p>
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Cheque/NEFT/Cash Payment Detail</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                From Date
+                                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "Search From Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                To Date
+                                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "Search To Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                Payment Mode
+                                                @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlPaymentMode, "Value", "Text"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <br />
+                                                <input class="btn btn-success" type="submit" value="Search" id="btnSearch" name="Search" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Customer ID</th>
+
+                                                    <th>Associate ID</th>
+
+                                                    <th>Mode</th>
+                                                    <th>Date</th>
+                                                    <th>Transaction No.</th>
+                                                    <th>Bank Details</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Description</th>
+                                                   
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                               @if (Model != null)
+                                               {
+                                                   if (Model.lstPlot != null)
+                                                   {
+                                                       int i = 1;
+                                                       foreach (var Item in Model.lstPlot)
+                                                       {
+                                                        <tr class="text-left">
+                                                            @*  <td hidden>@Item.UserID</td>*@
+                                                            <td>@i</td>
+                                                            <td>@Item.CustomerID (@Item.CustomerName)</td>
+
+                                                            <td>@Item.AssociateID (@Item.AssociateName)</td>
+
+                                                            <td>@Item.PaymentMode</td>
+                                                            <td>@Item.TransactionDate</td>
+                                                            <td>@Item.TransactionNumber</td>
+                                                            <td>@Item.Remark</td>
+                                                            <td>@Item.PaidAmount</td>
+                                                            <td>@Item.PaymentStatus</td>
+                                                            <td>
+                                                                <input type="text" id="txtDesc_@i" name="txtDesc_@i" onchange="getdata(this)" />
+                                                            </td>
+                                                           
+                                                            <td>
+                                                                <a href="#" class="btn btn-success btn-sm" onclick="Approve('@i','@Item.UserID');">Approve</a>
+                                                                <a href="#" class="btn btn-danger btn-sm" onclick="Reject('@i','@Item.UserID');">Reject</a>
+                                                            </td>
+                                                        </tr>
+                                                           i++;
+                                                       }
+                                                   }
+                                               }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Customer ID</th>
+
+                                                    <th>Associate ID</th>
+
+                                                    <th>Mode</th>
+                                                    <th>Date</th>
+                                                    <th>Transaction No.</th>
+                                                    <th>Bank Details</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Description</th>
+                                                     
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+       
+
+    <input type="hidden" id="txtdecription" />
+      <input type="hidden" id="txtAppDt" />
+
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+   
+    function Approve(id, userid) {
+        debugger
+            var r = confirm('Are you sure you want to approve this Payment ?');
+            if (r == true) {
+           
+                var Description = $('#' + 'txtDesc_' + id).val();
+                var Date = $('#' + 'txtAppDate_' + id).val();
+                if (Date == "") {
+                    alert('Please select approval date');
+                    return false;
+                }
+                $("#divload").css({ 'display': '' });
+                $.ajax({
+                    url: "/Plot/ApprovePayment",
+                    Type: "Get",
+                    DataType: "JSON",
+                    data: { UserID: userid, Description: $('#txtdecription').val()  },
+                    success: function (data) {
+                        if (data.Result == "1")
+                        {
+                            alert("Payment Approved successfully");
+                            window.location.href = '@Url.Action("Payment", "Plot")';
+                        }
+                        else
+                        {
+                            alert(data.Result);
+                        }
+                      
+                        $("#divload").css({ 'display': 'none' });
+                    }
+
+                });
+            }
+        }
+    
+
+
+    function getdata(decription) {
+        $('#txtdecription').val(decription.value);
+    }
+    function getdata2(date) {
+        $('#txtAppDt').val(date.value);
+    }
+
+
+    function Reject(id, userid) {
+        var r = confirm('Are you sure you want to reject this Payment ?');
+        if (r == true) {
+            $("#divload").css({ 'display': '' });
+            var Description = $('#' + 'txtDesc_' + id).val();
+            var Date = $('#' + 'txtAppDate_' + id).val();
+            if (Date == "") {
+                alert('Please select approval date');
+                return false;
+            }
+            $.ajax({
+                url: "/Plot/RejectPayment",
+                Type: "Get",
+                DataType: "JSON",
+                data: { UserID: userid, Description: $('#txtdecription').val()  },
+                success: function (data) {
+                    alert("Payment rejected ");
+                    window.location.href = '@Url.Action("Payment", "Plot")';
+                    $("#divload").css({ 'display': 'none' });
+                }
+
+            });
+        }
+    }
+</script>
+
+
+<script>
+
+
+    $('#FromDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#ToDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true
+    });
+    $('#txtAppDate').datepicker({
+        dateFormat: 'dd/mm/yy',
+         
+    });
+    
+</script>

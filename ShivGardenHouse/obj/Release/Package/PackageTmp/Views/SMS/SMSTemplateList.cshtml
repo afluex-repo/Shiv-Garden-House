@@ -1,0 +1,94 @@
+﻿@model ShivGardenHouse.Models.SMS
+
+@{
+    ViewBag.Title = "SMSTemplateList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("SMSTemplateList", "SMS", FormMethod.Post, new { @id = "formid1" }))
+{
+
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">SMS Template List</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- HTML5 Export Buttons table start -->
+                            <div class="card">
+                                <div class="card-header table-card-header">
+                                    <p style="color: red">
+                                        @TempData["SMSTemplateList"]
+                                    </p>
+                                    <a class="btn btn-primary btn-sm" style="margin-left:75%" href="/SMS/SMSTemplate">Add New</a>
+                                </div>
+                                <div class="card-block">
+                            
+                                   
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Template Name</th>
+                                                    <th>Msg</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.ListSMSTemplate != null)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var Item in Model.ListSMSTemplate)
+                                                        {
+                                                            <tr class="text-left">
+                                                               
+                                                                <td>@i</td>
+                                                                <td>@Item.TemplateName</td>
+                                                                <td>@Item.Msg</td>
+                                                                <td hidden="hidden">@Item.PK_TemplateId</td>
+                                                                <td>
+                                                                    <a href="/SMS/SMSTemplate?PK_TemplateId=@Item.PK_TemplateId" class="btn btn-info btn-sm">Edit</a>
+                                                                    <a href="/SMS/DeleteSMSTemplate?PK_TemplateId=@Item.PK_TemplateId" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Customer?');">Delete</a>
+
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>S No.</th>
+                                                    <th>Template Name</th>
+                                                    <th>Msg</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

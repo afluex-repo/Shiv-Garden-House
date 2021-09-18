@@ -1,0 +1,50 @@
+﻿@model ShivGardenHouse.Models.Home
+
+<nav class="pcoded-navbar">
+    <div class="pcoded-inner-navbar">
+        <ul class="pcoded-item">
+            @if (Model != null)
+            {
+                if (Model.lstMenu != null)
+                {
+
+                    foreach (var item in Model.lstMenu)
+                    {
+                        <li class="pcoded-hasmenu">
+                            <a href="@item.Url" class="waves-effect waves-dark">
+
+                                <span class="pcoded-mtext">@item.MenuName</span>
+                            </a>
+                            @if (item.Url == "#")
+                            {
+                            <ul class="pcoded-submenu">
+                                @foreach (var item1 in Model.lstsubmenu)
+                                {
+                                    if (item1.MenuId == item.MenuId)
+                                    {
+
+
+
+
+                                        <li>
+                                            <a href="@item1.Url" class="waves-effect waves-dark">
+                                                <span class="pcoded-mtext" data-i18n="nav.navigate.main">@item1.SubMenuName</span>
+                                            </a>
+                                        </li>
+
+
+
+
+
+                                    }
+                                }
+                            </ul>
+                            }
+                        </li>
+                    }
+                }
+            }
+
+        </ul>
+    </div>
+</nav>

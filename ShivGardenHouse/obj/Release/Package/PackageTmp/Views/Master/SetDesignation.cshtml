@@ -1,0 +1,174 @@
+﻿@model ShivGardenHouse.Models.Master
+
+@{
+    ViewBag.Title = "SetDesignation";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../files/assets/images/login-gif-11.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+        .card-block.box-list {
+    border: 2px solid #dfdfdf;
+}
+</style>
+<div class="loader" id="divload"></div>
+@using (Html.BeginForm("SetDesignation", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="page-header-title">
+                        <h4 class="m-b-10">Set New Rank</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Set New Rank</h5>
+                                    <p style="color: red">
+                                        @TempData["Designation"]
+                                    </p>
+                                </div>
+                                <div class="card-block">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label class="float-label">Login Id<span style="color:red">*</span></label>
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange ="return getUserDetails();" })
+                                            <span class="form-bar"></span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row" id="User" style="display:none">
+                                        <div class="col-md-8">
+                                            <div class="card-header">
+                                                <h5>User Details</h5>
+                                            </div>
+                                            <div class="card-block box-list">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label class="float-label"><b>User Name :</b></label>
+                                                        <label id="Name" class="form-bar"></label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="float-label"><b>Designation :</b></label>
+                                                        <label id="DesignationName" class="form-bar"></label>
+                                                     
+                                                        <span class="form-bar"></span>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label class="float-label"><b>Percentage :</b></label>
+                                                        <label id="Percentage" class="form-bar"></label>
+                                                    
+                                                        <span class="form-bar"></span>
+                                                        @Html.HiddenFor(m => m.DesignationID, new { @Value = @Model.DesignationID })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card-header">
+                                                <h5>Set New Rank</h5>
+                                            </div>
+                                            <div class="card-block box-list">
+                                                <div class="col-md-12">
+                                                    <label class="float-label">Designation<span style="color:red">*</span></label>
+                                                    @Html.DropDownListFor(m => m.PK_DesignationID, new SelectList(ViewBag.ddlDesignation, "Value", "Text"), new { @class = "form-control"})
+                                                    <input style="margin-top:5px;" class="btn btn-success" type="submit" onclick="return validateDesignation();" value="Update" id="btnUpdate" name="btnUpdate" />
+                                                </div>
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/files/bower_components/jquery/js/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function getUserDetails() {
+        $("#divload").css({ 'display': '' });
+        var LoginID = $('#LoginId').val();
+        $.ajax({
+            url: '/Master/getUserDetails', type: 'post', dataType: 'json',
+            data: { 'LoginID': LoginID },
+            success: function (data) {
+
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "yes") {
+                    $('#User').show();
+                    document.getElementById('Name').innerHTML = data.Name;
+                    document.getElementById('DesignationName').innerHTML = data.DesignationName;
+                    document.getElementById('Percentage').innerHTML = data.Percentage;
+                    $("#DesignationID").val(data.DesignationID);
+                    $("#LoginId").removeClass('errortext');
+                }
+                else if (data.Result == "no") {
+                    $('#User').hide();
+                    alert("User details not found !!");
+                    document.getElementById('Name').innerHTML ="";
+                    document.getElementById('DesignationName').innerHTML ="";
+                    document.getElementById('Percentage').innerHTML ="";
+                    $("#DesignationID").val("");
+                    $("#LoginId").addClass('errortext');
+                    $('#LoginId').focus();
+                    $('#LoginId').val('');
+
+                }
+            }
+        });
+    }
+   
+    function validateDesignation() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+            return false;
+        }
+        if ($('#PK_DesignationID').val() == '0') {
+            $("#PK_DesignationID").addClass('errortext');
+            $('#PK_DesignationID').focus();
+            //   alert("Please Select Designation .")
+            return false;
+        }
+    }
+</script>
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
