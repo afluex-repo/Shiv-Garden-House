@@ -83,6 +83,7 @@ namespace ShivGardenHouse.Models
         public string Nominee { get; set; }
         public string NomineeAge { get; set; }
         public string NomineeRelation { get; set; }
+        public string HiddenId { get; set; }
         #endregion
         public DataSet GetAssociateList()
         {
