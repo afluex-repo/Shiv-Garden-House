@@ -906,11 +906,13 @@ namespace ShivGardenHouse.Controllers
             if (AssociateID != null)
             {
                 model.Fk_UserId = AssociateID;
+               
             }
             else
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
+            model.HiddenId = AssociateID;
             List<AssociateBooking> lst = new List<AssociateBooking>();
 
             DataSet ds = model.GetDownlineTree();
