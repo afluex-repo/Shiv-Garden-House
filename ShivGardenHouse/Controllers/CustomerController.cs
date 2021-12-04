@@ -21,7 +21,7 @@ namespace ShivGardenHouse.Controllers
                 if (UserID != null)
                 {
                     model.UserID = Crypto.Decrypt(UserID);
-                  //  model.UserID = UserID;
+                    //  model.UserID = UserID;
                     DataSet dsPlotDetails = model.GetList();
                     if (dsPlotDetails != null && dsPlotDetails.Tables.Count > 0)
                     {
@@ -127,67 +127,95 @@ namespace ShivGardenHouse.Controllers
                 DataSet dsRegistration = model.CustomerRegistration();
                 if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
                 {
-                    if (model.Email != null)
+                    //if (model.Email != null)
+                    //{
+                    //    string mailbody = "";
+                    //    MailMessage msg = new MailMessage();
+
+                    //    msg.From = new MailAddress("info@afluex.com");
+                    //    msg.To.Add(model.Email);
+                    //    msg.Subject = "test";
+                    //    msg.Body = mailbody;
+                    //    msg.Priority = MailPriority.High;
+
+                    //    SmtpClient client = new SmtpClient();
+
+                    //    client.Credentials = new NetworkCredential("info@afluex.com", "afluex@9919", "smtp.gmail.com");
+                    //    client.Host = "smtp.gmail.com";
+                    //    client.Port = 587;
+                    //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //    client.EnableSsl = true;
+                    //    client.UseDefaultCredentials = true;
+
+                    //    client.Send(msg);
+                    //    //try
+                    //    //{
+                    //    mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as ShivGardenHouse Projects Customer.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+
+                    //    //    //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
+                    //    //    //var toAddress = new MailAddress(model.Email);
+
+                    //    //    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                    //    //    {
+                    //    //        //Host = "smtp.hostinger.com",
+                    //    //        Host = "smtp.gmail.com",
+                    //    //        Port = 587,
+                    //    //        EnableSsl = true,
+                    //    //        DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                    //    //        UseDefaultCredentials = false,
+                    //    //        //  Credentials = new NetworkCredential("support@ShivGardenHouse.com", "Client@manglam1")
+                    //    //        Credentials = new NetworkCredential("developer2.afluex@gmail.com", "devel@486")
+
+                    //    //    };
+
+                    //    //    using (var message = new MailMessage("developer2.afluex@gmail.com", model.Email)
+                    //    //    {
+                    //    //        IsBodyHtml = true,
+                    //    //        Subject = "Customer Registration",
+                    //    //        Body = mailbody
+                    //    //    })
+                    //    //        smtp.Send(message);
+                    //    //    TempData["Message"] = "Registration Successfull !";
+                    //    //}
+                    //    //catch (Exception ex)
+                    //    //{
+                    //    //    throw;
+                    //    //}}
+                    //}
+               
+
+                    if (dsRegistration != null && dsRegistration.Tables.Count > 0)
                     {
-                        string mailbody = "";
-                        try
+                        if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
                         {
-                            mailbody = "Dear  " + dsRegistration.Tables[0].Rows[0]["Name"].ToString() + ",You have been successfully registered as ShivGardenHouse Projects Customer.Given below are your login details .!<br/>  <b>Login ID</b> :  " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "<br/> <b>Passoword</b>  : " + Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                            Session["DisplayNameConfirm"] = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                            Session["LoginIDConfirm"] = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                            Session["PasswordConfirm"] = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                            string name = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
+                            string id = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
+                            string pass = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
+                            string mob = model.Contact;
+                            //string Message = "Dear Associate, Thanks for Registration in Shiv Garden House Your User Id is "+id+" and Password is "+pass+" Website https://shivgardenhouse.com/. Team Shiv Garden House&route=10";
+                            ////string str = BLSMS.CustomerRegistration(name, id, pass);
+                            //string RegSMS = BLSMS.CustomerRegistrationSMS(mob, Message);
 
-                            //var fromAddress = new MailAddress("prakher.afluex@gmail.com");
-                            //var toAddress = new MailAddress(model.Email);
-
-                            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
-                            {
-                                Host = "smtp.hostinger.com",
-                                Port = 587,
-                                EnableSsl = true,
-                                DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
-                                UseDefaultCredentials = false,
-                                Credentials = new NetworkCredential("support@ShivGardenHouse.com", "Client@manglam1")
-
-                            };
-
-                            using (var message = new MailMessage("support@ShivGardenHouse.com", model.Email)
-                            {
-                                IsBodyHtml = true,
-                                Subject = "Customer Registration",
-                                Body = mailbody
-                            })
-                                smtp.Send(message);
-                            TempData["Message"] = "Registration Successfull !";
+                            //try
+                            //{
+                            //    //BLSMS.SendSMS(mob, str);
+                            //    BLSMS.SendSMS(mob, RegSMS);
+                            //}
+                            //catch { }
                         }
-                        catch (Exception ex)
-                        {
-
-                        }
-                    }
-                }
-                if (dsRegistration != null && dsRegistration.Tables.Count > 0)
-                {
-                    if (dsRegistration.Tables[0].Rows[0][0].ToString() == "1")
-                    {
-                        Session["DisplayNameConfirm"] = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
-                        Session["LoginIDConfirm"] = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
-                        Session["PasswordConfirm"] = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
-                        string name = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
-                        string id = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
-                        string pass = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
-                        string mob = model.Contact;
-
-                        string str = BLSMS.CustomerRegistration(name, id, pass);
-                        try
-                        {
-                            BLSMS.SendSMS(mob, str);
-                        }
-                        catch { }
                     }
                     else
-                    {
-                        TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        {
+                            TempData["Registration"] = dsRegistration.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        }
                     }
-                }
+
+                
             }
+
             catch (Exception ex)
             {
                 TempData["Registration"] = ex.Message;
@@ -197,7 +225,7 @@ namespace ShivGardenHouse.Controllers
 
             return RedirectToAction(FormName, Controller);
         }
-
+    
         public ActionResult ConfirmRegistration()
         {
             return View();
