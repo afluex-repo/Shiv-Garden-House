@@ -16,8 +16,8 @@ namespace ShivGardenHouse.Models
         {
             try
             {
-              connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=shivgardenhousedb; User Id=shivgardenhouseuser; Password=shiv123!@#; Integrated Security=false;";
-               // connectionString = "Data Source=DESKTOP-KPDI8EN\\AFLUEX;Initial Catalog=Manglam InfraEstate;User Id=sa;Password=123;Integrated Security=false;";
+               connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=shivgardenhousedb; User Id=shivgardenhouseuser; Password=shiv123!@#; Integrated Security=false;";
+             //  connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=ShivGardenDBTest; User Id=shivuser; Password=Shiv@!789!; Integrated Security=false;";
             }
             catch (Exception)
             {

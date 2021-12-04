@@ -398,7 +398,7 @@ namespace ShivGardenHouse.Controllers
                         string AsstName = ds.Tables[0].Rows[0]["AssociateName"].ToString();
                         string plot = ds.Tables[0].Rows[0]["Plot"].ToString();
                         string mob = ds.Tables[0].Rows[0]["Mobile"].ToString();
-                        string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot);
+                        string str = BLSMS.Booking(Bookno, Bookamt, AsstName, plot, mob);
                         try
                         {
                             BLSMS.SendSMS(mob, str);

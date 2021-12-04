@@ -237,21 +237,24 @@ namespace ShivGardenHouse.Controllers
                         //TempData["Registration"] = "Registration successfull !";
                         //TempData["AssociateDetails"] = "Login ID : " + dsRegistration.Tables[0].Rows[0]["LoginId"].ToString() + "\nPassword : " + dsRegistration.Tables[0].Rows[0]["Password"].ToString();
 
-
+                        string mob = model.Contact;
                         Session["DisplayNameConfirm"] = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
                         Session["LoginIDConfirm"] = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["PasswordConfirm"] = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
                         string name = dsRegistration.Tables[0].Rows[0]["Name"].ToString();
                         string id = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
                         string pass = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
-                        string mob = model.Contact;
-                        try
-                        {
-                            string str = BLSMS.AssociateRegistration(name, id, pass);
+                      string Message = "Dear Associate, Thanks for Registration in Shiv Garden House Your User Id is " + id + " and Password is " + pass + " Website https://shivgardenhouse.com/. Team Shiv Garden House&route=10";
+                        string RegSMS = BLSMS.AssociateRegistrationSMS(mob, Message, id, pass, name);
 
-                            BLSMS.SendSMS(mob, str);
-                        }
-                        catch { }
+                        //string mob = model.Contact;
+                        //try
+                        //{
+                        //    string str = BLSMS.AssociateRegistration(name, id, pass);
+
+                        //    BLSMS.SendSMS(mob, str);
+                        //}
+                        //catch { }
                         FormName = "ConfirmRegistration";
                         Controller = "TraditionalAssociate";
                     }

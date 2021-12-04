@@ -1212,13 +1212,15 @@ namespace ShivGardenHouse.Controllers
                         string id = dsRegistration.Tables[0].Rows[0]["LoginId"].ToString();
                         string pass = Crypto.Decrypt(dsRegistration.Tables[0].Rows[0]["Password"].ToString());
                         string mob = model.Contact;
-                        try
-                        {
-                            string str = BLSMS.AssociateRegistration(name, id, pass);
+                        string Message = "Dear Associate, Thanks for Registration in Shiv Garden House Your User Id is " + id + " and Password is " + pass + " Website https://shivgardenhouse.com/. Team Shiv Garden House&route=10";
+                        string RegSMS = BLSMS.AssociateRegistrationSMS(mob, Message, id, pass, name);
+                        //try
+                        //{
+                        //    string str = BLSMS.AssociateRegistration(name, id, pass);
 
-                            BLSMS.SendSMS(mob, str);
-                        }
-                        catch { }
+                        //    BLSMS.SendSMS(mob, str);
+                        //}
+                        //catch { }
                     }
                     else
                     {
