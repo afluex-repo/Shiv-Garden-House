@@ -1258,6 +1258,7 @@
     <Content Include="our_projects.html" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <None Include="Properties\PublishProfiles\ShivGarden.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -1272,8 +1273,6 @@
     <Content Include="Website\css\ken-burns.css" />
     <Content Include="Website\css\style.css" />
     <Content Include="Website\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Website\images\1.jpg" />
-    <Content Include="Website\images\1.png" />
     <Content Include="Website\images\10.jpg" />
     <Content Include="Website\images\11.jpg" />
     <Content Include="Website\images\12.jpg" />
@@ -1284,13 +1283,7 @@
     <Content Include="Website\images\17.jpg" />
     <Content Include="Website\images\18.jpg" />
     <Content Include="Website\images\19.jpg" />
-    <Content Include="Website\images\2.jpg" />
-    <Content Include="Website\images\2.png" />
     <Content Include="Website\images\20.jpg" />
-    <Content Include="Website\images\3.jpg" />
-    <Content Include="Website\images\3.png" />
-    <Content Include="Website\images\4.jpg" />
-    <Content Include="Website\images\4.png" />
     <Content Include="Website\images\5.jpg" />
     <Content Include="Website\images\6.jpg" />
     <Content Include="Website\images\7.jpg" />
@@ -1321,7 +1314,6 @@
     <Content Include="Website\images\dhara-farm-popup.jpeg" />
     <Content Include="Website\images\dharaestate.jpg" />
     <Content Include="Website\images\fabicon.png" />
-    <Content Include="Website\images\farms.jpg" />
     <Content Include="Website\images\footerlogo.png" />
     <Content Include="Website\images\form.jpg" />
     <Content Include="Website\images\form1.jpg" />

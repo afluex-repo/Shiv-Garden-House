@@ -906,11 +906,13 @@ namespace ShivGardenHouse.Controllers
             if (AssociateID != null)
             {
                 model.Fk_UserId = AssociateID;
+               
             }
             else
             {
                 model.Fk_UserId = Session["Pk_UserId"].ToString();
             }
+            model.HiddenId = AssociateID;
             List<AssociateBooking> lst = new List<AssociateBooking>();
 
             DataSet ds = model.GetDownlineTree();
@@ -1316,5 +1318,42 @@ namespace ShivGardenHouse.Controllers
                 return View(ex.Message);
             }
         }
+
+        public ActionResult GetAdharDetails(string AdharNumber)
+        {
+            try
+            {
+                TraditionalAssociate model = new TraditionalAssociate();
+                model.AdharNo = AdharNumber;
+                #region GetAdharDetails
+                DataSet dsadhardetails = model.GetAdharDetails();
+                if (dsadhardetails != null && dsadhardetails.Tables[0].Rows.Count > 0)
+                {
+                    if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
+
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+
+
     }
 }

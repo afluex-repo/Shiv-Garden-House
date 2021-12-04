@@ -376,5 +376,40 @@ namespace ShivGardenHouse.Controllers
             return RedirectToAction("CustomerList", "Customer");
         }
 
+        public ActionResult GetAdharDetails(string AdharNumber)
+        {
+            try
+            {
+                Customer model = new Customer();
+                model.AdharNo = AdharNumber;
+                #region GetAdharDetails
+                DataSet dsadhardetails = model.GetAdharDetails();
+                if (dsadhardetails != null && dsadhardetails.Tables[0].Rows.Count > 0)
+                {
+                    if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        model.Result = "yes";
+                    }
+                    else if (dsadhardetails.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        model.Result = "no";
+                    }
+                }
+                else
+                {
+                    model.Result = "no";
+
+                }
+                #endregion
+                return Json(model, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+
+
     }
 }

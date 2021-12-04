@@ -36,6 +36,7 @@ namespace ShivGardenHouse.Models
         public string PanNo { get; set; }
         public string Pin { get; set; }
         public string BranchName { get; set; }
+        public string AdharNo { get; set; }
         public List<Customer> ListCust { get; set; }
 
         #endregion
@@ -67,6 +68,7 @@ namespace ShivGardenHouse.Models
                                   new SqlParameter("@AddedBy", AddedBy) ,
                                   new SqlParameter("@Password", Password) ,
                                   new SqlParameter("@FatherName", FatherName) ,
+                                  new SqlParameter("@AdharNo", AdharNo)
                                   };
             DataSet ds = Connection.ExecuteQuery("CustomerRegistration", para);
             return ds;
@@ -143,9 +145,21 @@ namespace ShivGardenHouse.Models
         }
 
 
+        public DataSet GetAdharDetails()
+        {
+            SqlParameter[] para = {
+                new SqlParameter("@AdharNumber", AdharNo)
+            };
+            DataSet ds = Connection.ExecuteQuery("GetAdharDetails", para);
+            return ds;
+        }
+
+
+        
 
         public string JoiningDate { get; set; }
 
         public string EncryptKey { get; set; }
+
     }
 }

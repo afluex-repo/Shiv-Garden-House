@@ -155,7 +155,7 @@ namespace ShivGardenHouse.Models
         }
 
         public string Fk_UserId { get; set; }
-
+       
 
         public static List<SelectListItem> BindPaymentStatus()
         {
@@ -240,9 +240,9 @@ namespace ShivGardenHouse.Models
             public static string Pin1 = "226001";
             public static string State1 = "UP";
             public static string City1 = "Lucknow";
-            public static string ContactNo = "+91 9415518621";
-            public static string Website = "www.manglaminfraestate.in";
-            public static string EmailID = "info@manglaminfraestate.in";
+            public static string ContactNo = "+91 969-500-0016";
+            public static string Website = "www.shivgardenhouse.com";
+            public static string EmailID = "info@shivgardenhouse.com";
         }
 
 

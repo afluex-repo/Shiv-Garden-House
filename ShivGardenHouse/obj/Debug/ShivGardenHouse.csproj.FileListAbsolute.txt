@@ -139,3 +139,5 @@ E:\Repository\Shiv-Garden-House\ShivGardenHouse\bin\System.Web.Helpers.xml
 E:\Repository\Shiv-Garden-House\ShivGardenHouse\bin\System.Web.Mvc.xml
 E:\Repository\Shiv-Garden-House\ShivGardenHouse\obj\Debug\ShivGardenHouse.dll
 E:\Repository\Shiv-Garden-House\ShivGardenHouse\obj\Debug\ShivGardenHouse.pdb
+E:\Repository\Shiv-Garden-House\ShivGardenHouse\obj\Debug\ShivGardenHouse.csprojResolveAssemblyReference.cache
+D:\SachinMishraProject\repository\Shiv-Garden-House\ShivGardenHouse\obj\Debug\ShivGardenHouse.csprojResolveAssemblyReference.cache

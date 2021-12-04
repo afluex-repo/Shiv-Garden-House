@@ -16,7 +16,7 @@ namespace ShivGardenHouse.Models
         public string AmountType { get; set; }
         public string DepositAmount { get; set; }
         public string IncomeType { get; set; }
-        
+
         public string SponsorDesignationID { get; set; }
         public List<SelectListItem> ddlDesignation { get; set; }
         public List<AssociateBooking> ClosingWisePayoutlist { get; set; }
@@ -73,6 +73,17 @@ namespace ShivGardenHouse.Models
         public string DevelopmentCharge { get; set; }
         public List<AssociateBooking> lstPlot { get; set; }
         public string BookingStatus { get; set; }
+
+        public string AdharNo { get; set; }
+        public string BankHolderName { get; set; }
+        public string MemberAccNo { get; set; }
+        public string MemberBankName { get; set; }
+        public string MemberBranch { get; set; }
+        public string IFSCCode { get; set; }
+        public string Nominee { get; set; }
+        public string NomineeAge { get; set; }
+        public string NomineeRelation { get; set; }
+        public string HiddenId { get; set; }
         #endregion
         public DataSet GetAssociateList()
         {
@@ -93,17 +104,17 @@ namespace ShivGardenHouse.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@PK_BookingId", PK_BookingId),
-                                     new SqlParameter("@AssociateID", LoginId)   ,                               
-                                  
-                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,  
-                                    new SqlParameter("@CustomerName", CustomerName)   ,  
-                                    new SqlParameter("@PK_SiteID", SiteID)   ,  
-                                    new SqlParameter("@PK_SectorID", SectorID)   ,  
-                                    new SqlParameter("@PK_BlockID", BlockID)   , 
-                                    new SqlParameter("@PlotNumber", PlotNumber)   ,  
-                                    new SqlParameter("@BookingNumber", BookingNumber)   ,  
-                                    new SqlParameter("@FromDate", FromDate)   , 
-                                    new SqlParameter("@ToDate", ToDate)   
+                                     new SqlParameter("@AssociateID", LoginId)   ,
+
+                                     new SqlParameter("@CustomerLoginID", CustomerLoginID)   ,
+                                    new SqlParameter("@CustomerName", CustomerName)   ,
+                                    new SqlParameter("@PK_SiteID", SiteID)   ,
+                                    new SqlParameter("@PK_SectorID", SectorID)   ,
+                                    new SqlParameter("@PK_BlockID", BlockID)   ,
+                                    new SqlParameter("@PlotNumber", PlotNumber)   ,
+                                    new SqlParameter("@BookingNumber", BookingNumber)   ,
+                                    new SqlParameter("@FromDate", FromDate)   ,
+                                    new SqlParameter("@ToDate", ToDate)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForAssociate", para);
             return ds;
@@ -134,8 +145,8 @@ namespace ShivGardenHouse.Models
 
         public DataSet GetDownlineDetails()
         {
-            SqlParameter[] para = { 
-                                       
+            SqlParameter[] para = {
+
                                       new SqlParameter("@LoginId", LoginId) };
             DataSet ds = Connection.ExecuteQuery("GetDownlineAssociateDetails", para);
             return ds;
@@ -203,11 +214,11 @@ namespace ShivGardenHouse.Models
         public DataSet GetBookingDetailsList()
         {
             SqlParameter[] para = {
-                                      
+
                                       new SqlParameter("@PK_BookingId", PK_BookingId),
                                         new SqlParameter("@CustomerID", CustomerID),
                                           new SqlParameter("@AssociateID", AssociateID)
-                                  
+
                                   };
 
             DataSet ds = Connection.ExecuteQuery("GetPlotBooking", para);
@@ -216,7 +227,7 @@ namespace ShivGardenHouse.Models
 
         public DataSet GetDetails()
         {
-            SqlParameter[] para = { 
+            SqlParameter[] para = {
                                         new SqlParameter("@LoginId", LoginId) };
             DataSet ds = Connection.ExecuteQuery("GetUplineAssociateDetails", para);
             return ds;
@@ -226,7 +237,7 @@ namespace ShivGardenHouse.Models
             SqlParameter[] para = {
                                       new SqlParameter("@OldPassword", Password) ,
                                       new SqlParameter("@NewPassword", NewPassword) ,
-                                      new SqlParameter("@UpdatedBy", UpdatedBy) 
+                                      new SqlParameter("@UpdatedBy", UpdatedBy)
                                   };
             DataSet ds = Connection.ExecuteQuery("ChangePasswordAssociate", para);
             return ds;
@@ -246,8 +257,8 @@ namespace ShivGardenHouse.Models
         public DataSet GetDetailsForBarGraph()
         {
             SqlParameter[] para = {
-                                    
-                                      new SqlParameter("@Fk_AssociateId", AssociateID) 
+
+                                      new SqlParameter("@Fk_AssociateId", AssociateID)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetPlotBookingForGraphOnAssociateDashboard", para);
             return ds;
@@ -258,8 +269,8 @@ namespace ShivGardenHouse.Models
         public DataSet GetDueInstallmentList()
         {
             SqlParameter[] para = {
-                                    
-                                      new SqlParameter("@Fk_AssociateId", AssociateID) 
+
+                                      new SqlParameter("@Fk_AssociateId", AssociateID)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetDueInstallmentForAssociateDashboard", para);
             return ds;
@@ -267,8 +278,8 @@ namespace ShivGardenHouse.Models
         public DataSet BindGraphDetails()
         {
             SqlParameter[] para = {
-                                    
-                                      new SqlParameter("@LoginId", LoginId) 
+
+                                      new SqlParameter("@LoginId", LoginId)
                                   };
             DataSet ds = Connection.ExecuteQuery("PlotDetailsOnGraphForAssociateDashboard", para);
             return ds;
@@ -300,7 +311,7 @@ namespace ShivGardenHouse.Models
         {
             SqlParameter[] para = {
                                      new SqlParameter("@PK_UserId", UserID) ,
-                                      new SqlParameter("@AssociateId", LoginId) 
+                                      new SqlParameter("@AssociateId", LoginId)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetAssociateDetailsForEditProfile", para);
             return ds;
@@ -334,8 +345,8 @@ namespace ShivGardenHouse.Models
         public DataSet GetNews()
         {
             SqlParameter[] para = {
-                                    
-                                      new SqlParameter("@PK_NewsID", PK_NewsID) 
+
+                                      new SqlParameter("@PK_NewsID", PK_NewsID)
                                   };
             DataSet ds = Connection.ExecuteQuery("GetNewsList", para);
             return ds;
@@ -371,10 +382,20 @@ namespace ShivGardenHouse.Models
                                   new SqlParameter("@City", City) ,
                                   new SqlParameter("@Address", Address) ,
                                   new SqlParameter("@PanNo", PanNo) ,
+                                  new SqlParameter("@AdharNo",AdharNo) ,
                                   new SqlParameter("@PanImage", PanImage) ,
                                   new SqlParameter("@AddedBy", AddedBy) ,
                                   new SqlParameter("@Password", Password) ,
                                     new SqlParameter("@FatherName", FatherName) ,
+                                      new SqlParameter("@BankHolderName", BankHolderName) ,
+                                      new SqlParameter("@MemberAccNo",MemberAccNo) ,
+                                       new SqlParameter("@MemberBankName", MemberBankName) ,
+                                        new SqlParameter("@MemberBranch", MemberBranch) ,
+                                         new SqlParameter("@IFSCCode", IFSCCode) ,
+                                          new SqlParameter("@Nominee",Nominee),
+                                           new SqlParameter("@NomineeAge",NomineeAge),
+                                            new SqlParameter("@NomineeRelation",NomineeRelation)
+
                                   };
             DataSet ds = Connection.ExecuteQuery("AssociateRegistrationTraditional", para);
             return ds;

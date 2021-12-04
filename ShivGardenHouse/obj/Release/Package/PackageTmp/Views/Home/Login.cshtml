@@ -1,0 +1,296 @@
+﻿@model ShivGardenHouse.Models.Home
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login :: Shiv Garden House Projects </title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Domicile Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <link href="~/Website/images/fabicon.png" type="text/x-component" rel="icon" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Website/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Website/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Website/css/ken-burns.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Website/css/animate.min.css" type="text/css" media="all" />
+    <!-- js -->
+    <script type="text/javascript" src="~/Website/js/jquery-2.1.4.min.js"></script>
+    <!-- //js -->
+    <link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Website/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Website/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+        $(document).ready(function () {
+            $('.navbar a.dropdown-toggle').on('click', function (e) {
+                var $el = $(this);
+                var $parent = $(this).offsetParent(".dropdown-menu");
+                $(this).parent("li").toggleClass('open');
+
+                if (!$parent.parent().hasClass('nav')) {
+                    $el.next().css({ "top": $el[0].offsetTop, "left": $parent.outerWidth() - 4 });
+                }
+
+                $('.nav li.open').not($(this).parents("li")).removeClass("open");
+
+                return false;
+            });
+        });
+
+    </script>
+    <!-- start-smoth-scrolling -->
+    <style>
+        @@media (min-width: 767px) {
+            .navbar-nav .dropdown-menu .caret {
+                transform: rotate(-90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header">
+        <div class="container">
+            <div class="w3l_header_left">
+                <ul>
+                    <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@Shiv Garden House Projects group.org">info@shivardenhouse.in</a></li>
+                    <li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> (+91) 969 - 500-0016</li>
+                </ul>
+            </div>
+            <div class="w3l_header_right">
+                <ul class="social-icons">
+                    <li><a href="https://www.facebook.com/ShivGardenHouse" class="icon icon-border facebook"></a></li>
+                  <li><a target="_blank" href="https://twitter.com/ShivGardenHouse" class="icon icon-border twitter"></a></li>
+                    <li><a href="#" class="icon icon-border instagram"></a></li>
+                    <li><a href="#" class="icon icon-border pinterest"></a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    @*<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>*@
+                    <a class="navbar-brand" href="#" style="display:none">
+                        <img src="~/Website/images/Logo.png" class="img-responsive" style="padding:30px;margin-left: 125%;width: 293px;" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                @*<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                    <nav class="cl-effect-1" id="cl-effect-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="../#">Home</a></li>
+                            <li><a href="#" class="hvr-bounce-to-bottom">About Company</a></li>
+                            <li><a href="#" class="hvr-bounce-to-bottom">View Form</a></li>
+                            <li><a href="#" class="hvr-bounce-to-bottom">Project gallery</a></li>
+                            <li><a href="#" class="hvr-bounce-to-bottom">Gallery</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Home/Login" target="_blank">Login</a></li>*@
+                                    <!-- <li class="divider"></li>
+                <li><a href="Default.aspx">Nidhi login</a></li> -->
+                                @*</ul>
+                            </li>
+                            <li><a href="#" class="hvr-bounce-to-bottom">Contact Us</a></li>
+                        </ul>
+                    </nav>
+                </div>*@
+                <!-- /.navbar-collapse -->
+            </nav>
+            <!-- search-jQuery -->
+            <script src="~/Website/js/main.js"></script>
+            <!-- //search-jQuery -->
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- team -->
+    @*<div class="pageheader">
+        <img src="~/Website/images/login_form_banner.jpg" />       
+    </div>*@ 
+
+    <div class="team">
+        <div class="container">
+            <div class="w3l_services_grids">
+                @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm", @class = "md-float-material form-material" }))
+                {
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6" style="border:solid 1px">
+                            <div class="auth-box card">
+                                <div class="card-block">
+                                    <div class="row m-b-20">
+                                        <div class="col-md-12">
+                                            <br />
+                                            <h3 class="text-center txt-primary">Sign In</h3>
+                                        </div>
+                                    </div>
+                                    @*<div class="row m-b-20">
+                                            <div class="col-md-6">
+                                                <button class="btn btn-facebook m-b-20 btn-block"><i class="icofont icofont-social-facebook"></i>facebook</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button class="btn btn-twitter m-b-20 btn-block"><i class="icofont icofont-social-twitter"></i>twitter</button>
+                                            </div>
+                                        </div>*@
+                                    @*  <p class="text-muted text-center p-b-5">Sign in with your regular account</p>*@
+                                    <div class="form-group form-primary">
+                                        <label>Login Id</label>
+                                        <input class="form-control" type="text" id="txtLoginID" name="LoginID" required="">
+                                        <span class="form-bar"></span>
+                                        @*  <label class="float-label">Login Id</label>*@
+                                    </div>
+                                    <div class="form-group form-primary">
+                                        <label>Password</label>
+                                        <input class="form-control" type="password" id="txtPassword" name="password" required="">
+                                        <span class="form-bar"></span>
+                                        @* <label class="float-label">Password</label>*@
+                                    </div>
+                                    <div class="row m-t-25 text-left">
+                                        <div class="col-12">
+                                            <div class="forgot-phone text-right float-right">
+                                                <a href="/ForgotPassword/ForgotPassword" class="text-right f-w-600" style="margin-right:4%"> Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-t-30">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-6 text-center">
+                                            <p style="color: red">
+                                                @TempData["Login"]
+                                            </p>
+                                            <br />
+                                            <input type="submit" value="Login" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" name="btnLogin" />
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3"><br /></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+
+                }
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <!-- //team -->
+    <!-- footer -->
+    @*<div class="footer">
+        <div class="container">
+            <div class="w3agile_footer_grids">
+                <div class="col-md-4 agileinfo_footer_grid">
+                    <div class="footer-logo">
+                        <img src="~/Website/images/logo.png" class="img-responsive" /></a>
+                        <p style="text-align: justify">Manglam Infra Farm began its operations from the City of Nawabs- Lucknow, Uttar Pradesh, India. Since then we are carrying out various residential and commercial projects to cater the needs and requirements of people at affordable rates along ....</p>
+                    </div>
+                </div>
+                <div class="col-md-3 agileinfo_footer_grid">
+                    <h4><span>Call Us</span>  (+91) 969 - 500-0016</h4>
+                    <p>SHIVLAR VILLAGE, POORVANCHAL EXPRESSWAY , LUCKNOW ( UP) 226001 </p>
+                    <ul class="social-icons">
+                        <li><a target="_blank" href="https://www.facebook.com/ShivGardenHouse" class="icon icon-border facebook"></a></li>
+                      <li><a  target="_blank" href="https://twitter.com/ShivGardenHouse" class="icon icon-border twitter"></a></li>
+                        <li><a href="#" class="icon icon-border instagram"></a></li>
+                        <li><a href="#" class="icon icon-border pinterest"></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 agileinfo_footer_grid agileinfo_footer_grid1">
+                    <ul>
+                        <li><a href="../#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">View From</a></li>
+                        <li><a href="#">Our Projects</a></li>
+                        <li><a href="#">Our Gallery</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 agileinfo_footer_grid">
+                    <div class="agileinfo_footer_grid_left">
+                        <a href="#">
+                            <img src="~/Website/images/park.jpg" alt=" " class="img-responsive" />
+                        </a>
+                    </div>
+                    @*<div class="agileinfo_footer_grid_left">
+                        <a href="#">
+                            <img src="~/Website/images/hospital.jpg" alt=" " class="img-responsive" />
+                        </a>
+                    </div>*@
+                    @*<div class="agileinfo_footer_grid_left">
+                        <a href="#">
+                            <img src="~/Website/images/hotel.jpg" alt=" " class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="agileinfo_footer_grid_left">
+                        <a href="#">
+                            <img src="~/Website/images/college.jpg" alt=" " class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>*@
+    @*<div class="footer-copy">
+        <div class="container">
+            <p>© 2019  <a href="#">Shiv Garden House Projects </a> |  All rights reserved</p>
+        </div>
+    </div>*@
+    <!-- //footer -->
+    <!-- for bootstrap working -->
+    <script src="~/Website/js/bootstrap.js"></script>
+    <!-- //for bootstrap working -->
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <!--Pop up-->
+    <!-- <script src="popup/tinybox.js"></script>
+    <link href="popup/Popup.css" rel="stylesheet" />
+    <script type="text/javascript">
+        TINY.box.show({ image: 'popup/.jpg', boxid: 'frameless', animate: true, openjs: function () { openJS() } })
+    </script> -->
+    <!--Pop up-->
+</body>
+</html>
